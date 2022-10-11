@@ -1,5 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import Banner from './components/Banner';
 import CourseList from './components/CourseList'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const schedule = {
   "title": "CS Courses for 2018-2019",
@@ -37,7 +40,7 @@ const App = () => {
   const date = today.toLocaleDateString([], {dateStyle: 'long'})
 
   return (
-    <div>
+    <div className="container">
       {/* <h1>Sample React code</h1>
       <p>Today is {day}, {date}.</p> */}
       <Banner title={schedule.title} />
