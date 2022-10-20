@@ -1,12 +1,15 @@
 import Course from './Course'
 import './CourseList.css'
 
-const CourseList = ({courses}) => {  
-  // courses.map(([]))
+const CourseList = ({courses, selected, toggleSelected}) => {  
+
   return (
   <div className='course-list'>
-    { courses.map((course, index) => <Course key={index} course={course} />) }
-    {/* { Object.entries(courses).map(([id, course]) => <Course key={id} course={course} />) } */}
+    { courses.map(([k, o]) => <Course key={k}
+                                      id={k}
+                                      course={o} 
+                                      selected={selected} 
+                                      toggleSelected={toggleSelected} />) }
   </div>
 )};
 
