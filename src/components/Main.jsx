@@ -11,7 +11,7 @@ const Main = () => {
 
     return (
       <div className="container">          
-          <Banner title={data.title} />          
+          <Banner title={data.title} />  
           <TermPage courses={data.courses} />
       </div>    
     );
