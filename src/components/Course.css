@@ -7,3 +7,7 @@
 .card.selected {
   background-color:lemonchiffon;
 }
+
+.card.conflict {
+  background-color: rgb(249, 157, 157);
+}

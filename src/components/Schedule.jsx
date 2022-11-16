@@ -1,16 +1,18 @@
 import CourseList from './CourseList'
 
 
-const Schedule = ({ courses, selected }) => (
+const Schedule = ({ selectedCourses, toggleSelected }) => (
   <div>
     {
-      selected.length === 0
+      selectedCourses.length === 0
       ? <div>
           <h2>The schedule is empty</h2>
           <p>Click on a course to add it to your schedule.</p>
         </div>
-      : <CourseList courses={courses} 
-                    selected={selected} />
+      : <div>
+          <h2>Your schedule</h2>
+          <CourseList termCourses={selectedCourses} toggleSelected={toggleSelected} />
+        </div>      
     }
   </div>
 );
