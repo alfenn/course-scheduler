@@ -2,12 +2,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useFormData } from '../utilities/useFormData';
 
 
-const validateUserData = (key, val) => {
+const validateCourseData = (key, val) => {
   switch (key) {
-    case 'firstName': case 'lastName':
+    case 'title':
       return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
-    case 'email':
-      return /^\w+@\w+[.]\w+/.test(val) ? '' : 'must contain name@domain.top-level-domain';
+    case 'meets':
+            return /[M|Tu|W|Th|F]+ [0-9][0-9]:[0-9][0-9]-[0-9][0-9]:[0-9][0-9]/gm.test(val) ? '' : 'Invalid meeting times - must specify valid days (MTuWThF) followed by a space and valid military-style times';
     default: return '';
   }
 };
