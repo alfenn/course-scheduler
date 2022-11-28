@@ -8,7 +8,7 @@ import { useDbData } from './utilities/firebase';
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [data, error] = useDbData();
+  const [data, error] = useDbData('/');
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
   if (data===undefined) return <h1>Loading user data...</h1>;
   if (!data) return <h1>No user data found</h1>;

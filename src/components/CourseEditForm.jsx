@@ -37,7 +37,7 @@ const ButtonBar = ({message, disabled}) => {
 const CourseEditForm = ({data}) => {
   const { courseId } = useParams();
   const course = data.courses[courseId];
-  const [state, change] = useFormData(undefined, course);
+  const [state, change] = useFormData(validateCourseData, course);
   const submit = (evt) => {
     evt.preventDefault();
     // if (!state.errors) {

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref, update } from "firebase/database";
 import { useCallback, useEffect, useState } from 'react';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -13,6 +14,9 @@ const firebaseConfig = {
   appId: "1:471827832691:web:f091356087bea54fc06f06",
   measurementId: "G-8FGVXZJKF3"
 };
+
+
+///////////// Firebase db //////////////
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
@@ -52,3 +56,22 @@ export const useDbUpdate = (path) => {
   return [updateData, result];
 };
 
+///////////// Sign-in and out //////////////
+
+export const signInWithGoogle = () => {
+  signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
+};
+
+const firebaseSignOut = () => signOut(getAuth(firebase));
+
+export { firebaseSignOut as signOut };
+
+export const useAuthState = () => {
+  const [user, setUser] = useState();
+  
+  useEffect(() => (
+    onAuthStateChanged(getAuth(firebase), setUser)
+  ), []);
+
+  return [user];
+};
