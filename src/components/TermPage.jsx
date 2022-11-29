@@ -3,9 +3,20 @@ import CourseList from './CourseList'
 import TermSelector from './TermSelector'
 import Modal from './Modal'
 import Schedule from './Schedule'
-import './TermPage.css'
 import { hasOverlap } from '../utilities/checkConflicts';
+import { signInWithGoogle, signOut, useAuthState } from '../utilities/firebase';
 
+const SignInButton = () => (
+  <button className="ms-auto btn btn-dark" onClick={signInWithGoogle}>Sign in</button>
+);
+
+const SignOutButton = () => (
+  <button className="ms-auto btn btn-dark" onClick={signOut}>Sign out</button>
+);
+
+const AuthButton = ({ user }) => {
+  return user ? <SignOutButton /> : <SignInButton />;
+};
 
 const terms = {
   Fall: 'Fall',
@@ -17,6 +28,7 @@ const TermPage = ({ courses }) => {
   const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
   const [selected, setSelected] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [user] = useAuthState();
   const openModal = () => setIsVisible(true);
   const closeModal = () => setIsVisible(false);
 
@@ -52,17 +64,21 @@ const TermPage = ({ courses }) => {
   });
 
   const displayedCourses = coursesWithInfo.filter(course => course.term===selection)
-  const selectedCourses = coursesWithInfo.filter(course => course.isSelected===true)
+  const selectedCourses = coursesWithInfo.filter(course => course.isSelected===true)  
 
   return (
     <div>
-      <nav>
+      <nav className='d-flex justify-content-between'>
         <TermSelector terms={terms} selection={selection} setSelection={setSelection} />
-        <button className="btn btn-outline-dark" onClick={openModal}><i className="bi bi-cart4"></i></button>
+        <div>
+          <AuthButton user={user} />
+          <button className="btn btn-outline-dark mx-3" onClick={openModal}><i className="bi bi-cart4"></i></button>
+        </div>        
       </nav>
       <CourseList termCourses={displayedCourses}
                   selected={selected}
-                  toggleSelected={toggleSelected} />
+                  toggleSelected={toggleSelected}
+                  user={user} />
       <Modal isVisible={isVisible} closeModal={closeModal}>
         <Schedule selectedCourses={selectedCourses} toggleSelected={() => {}} />
       </Modal>

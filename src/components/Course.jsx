@@ -1,8 +1,9 @@
 import './Course.css';
 import './CourseList.css'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-const Course = ({ course, toggleSelected }) => {
+const Course = ({ course, toggleSelected, user }) => {
+  const activation = user !== null;
   const cardColor = course.doesOverlap ? 'conflict' : 
     course.isSelected ? 'selected' : ''
   
@@ -16,7 +17,8 @@ const Course = ({ course, toggleSelected }) => {
         <div className="mt-auto">
           <hr />
           <p className='card-text'>{course.meets}</p>
-          <Link to={`/courses/${course.id}/edit`} style={{fontSize: '15px', color: 'gray'}}>Edit course info</Link>
+          <NavLink to={`/courses/${course.id}/edit`} style={{display: `${!activation ? 'none': ''}`}} end>Edit course info</NavLink>
+          {/* <Link to={`/courses/${course.id}/edit`} style={{fontSize: '15px', color: 'gray'}}>Edit course info</Link> */}
         </div>
       </div>
     </div>

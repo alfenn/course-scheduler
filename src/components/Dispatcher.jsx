@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useJsonQuery } from '../utilities/fetch';
 import Planner from './Planner';
 import CourseEditForm from './CourseEditForm';
 
@@ -15,3 +14,4 @@ const Dispatcher = ({ data }) => {
 }
 
 export default Dispatcher;
+

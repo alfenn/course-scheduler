@@ -3,6 +3,7 @@ import { getDatabase, onValue, ref, update } from "firebase/database";
 import { useCallback, useEffect, useState } from 'react';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDVetp7fza2IdKM6vY6XL8By-VEURdgyw4",
