@@ -2,8 +2,8 @@ import './Course.css';
 import './CourseList.css'
 import { Link, NavLink } from 'react-router-dom';
 
-const Course = ({ course, toggleSelected, user }) => {
-  const activation = user !== null;
+const Course = ({ course, toggleSelected, user, isAdmin }) => {
+  const activation = user !== null && isAdmin !== null;
   const cardColor = course.doesOverlap ? 'conflict' : 
     course.isSelected ? 'selected' : ''
   

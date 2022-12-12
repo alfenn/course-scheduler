@@ -5,6 +5,7 @@ import Modal from './Modal'
 import Schedule from './Schedule'
 import { hasOverlap } from '../utilities/checkConflicts';
 import { signInWithGoogle, signOut, useAuthState } from '../utilities/firebase';
+import { useProfile } from '../utilities/profile';
 
 const SignInButton = () => (
   <button className="ms-auto btn btn-dark" onClick={signInWithGoogle}>Sign in</button>
@@ -28,7 +29,8 @@ const TermPage = ({ courses }) => {
   const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
   const [selected, setSelected] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [user] = useAuthState();
+  // const [user] = useAuthState();
+  const [{user, isAdmin},] = useProfile();
   const openModal = () => setIsVisible(true);
   const closeModal = () => setIsVisible(false);
 
@@ -78,7 +80,8 @@ const TermPage = ({ courses }) => {
       <CourseList termCourses={displayedCourses}
                   selected={selected}
                   toggleSelected={toggleSelected}
-                  user={user} />
+                  user={user}
+                  isAdmin={isAdmin} />
       <Modal isVisible={isVisible} closeModal={closeModal}>
         <Schedule selectedCourses={selectedCourses} toggleSelected={() => {}} />
       </Modal>
